@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 use Laravel\Cashier\Cashier;
 use Mariuzzo\LaravelJsLocalization\Commands\LangJsCommand;
 use Mariuzzo\LaravelJsLocalization\Generators\LangJsGenerator;
@@ -15,9 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
-      
-        
         Cashier::ignoreMigrations();
         $this->app->singleton('localization.js', function ($app) {
             $app = $this->app;
@@ -37,25 +35,20 @@ class AppServiceProvider extends ServiceProvider
 
             return new LangJsCommand($generator);
         });
-//        $this->app->singleton(
-//        // the original class
-//            'vendor/brotzka/laravel-dotenv-editor/src/DotenvEditor.php',
-//            // my custom class
-//            'app/DotenvEditor.php'
-//        );
     }
 
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
-{
-    \Illuminate\Pagination\Paginator::useBootstrap();
-    Schema::defaultStringLength(191);
-    app()->useLangPath(base_path('lang'));
+    {
+        \Illuminate\Pagination\Paginator::useBootstrap();
+        Schema::defaultStringLength(191);
+        app()->useLangPath(base_path('lang'));
 
-    // Force HTTPS en production
-    if (env('APP_ENV') !== 'local') {
-        URL::forceScheme('https');
+        // Force HTTPS en production
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }
