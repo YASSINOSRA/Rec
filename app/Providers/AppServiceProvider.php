@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
+        if (env('APP_ENV') !== 'local') {
+               URL::forceScheme('https');
+           }
+        
         Cashier::ignoreMigrations();
         $this->app->singleton('localization.js', function ($app) {
             $app = $this->app;
