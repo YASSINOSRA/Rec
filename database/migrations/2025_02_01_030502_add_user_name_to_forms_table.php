@@ -11,12 +11,15 @@ class AddUserNameToFormsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('forms', function (Blueprint $table) {
-            $table->string('user_name')->nullable();  // Add user_name column
-        });
-    }
+ public function up()
+{
+    Schema::table('forms', function (Blueprint $table) {
+        if (!Schema::hasColumn('forms', 'user_name')) {
+            $table->string('user_name')->nullable();
+        }
+    });
+}
+
 
     /**
      * Reverse the migrations.
