@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         app()->useLangPath(base_path('lang'));
 
-        // Force HTTPS en production
+        // Force HTTPS in production
         if (env('APP_ENV') !== 'local') {
             URL::forceScheme('https');
         }
@@ -54,10 +54,10 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Check if the 'storage/app' directory exists and set permissions
+        // Check if the 'storage/app' directory exists and set permissions only in non-production
         $storagePath = storage_path('app');
-        if (is_dir($storagePath)) {
-            chmod($storagePath, 0775); // Set the directory permissions to 0775
+        if (is_dir($storagePath) && env('APP_ENV') !== 'production') {
+            chmod($storagePath, 0775); // Set the directory permissions to 0775, only in non-production environments
         }
     }
 }
