@@ -51,7 +51,13 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
         if ($this->app->environment('production')) {
-        URL::forceScheme('https');
-    }
+            URL::forceScheme('https');
+        }
+
+        // Check if the 'storage/app' directory exists and set permissions
+        $storagePath = storage_path('app');
+        if (is_dir($storagePath)) {
+            chmod($storagePath, 0775); // Set the directory permissions to 0775
+        }
     }
 }
