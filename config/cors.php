@@ -3,9 +3,9 @@
 return [
 
     /*
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     |
     | Here you may configure your settings for cross-origin resource sharing
     | or "CORS". This determines what cross-origin operations may execute
@@ -15,28 +15,20 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],  // Ensure Sanctum's CSRF cookie path is allowed
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Allow OPTIONS method for preflight requests
+    'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'https://rec-production-2edb.up.railway.app',  // Add other domains if needed
-        'http://your-local-domain.com',  // If testing locally, add this for localhost support
-    ],
+    'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [],  // Use this if you need pattern-based matching for origins
+    'allowed_origins_patterns' => [],
 
-    'allowed_headers' => [
-        'Content-Type',
-        'Authorization',
-        'X-Requested-With',
-        'X-CSRF-TOKEN',  // Ensure CSRF token header is allowed
-    ],
+    'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],  // Expose any headers to the browser if necessary
+    'exposed_headers' => [],
 
-    'max_age' => 0,  // Cache duration for preflight requests in seconds, adjust as needed
+    'max_age' => 0,
 
-    'supports_credentials' => true,  // Allow cookies and credentials in requests
+    'supports_credentials' => false,
 
 ];
