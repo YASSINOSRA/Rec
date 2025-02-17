@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
 use Laravel\Cashier\Cashier;
 use Mariuzzo\LaravelJsLocalization\Commands\LangJsCommand;
 use Mariuzzo\LaravelJsLocalization\Generators\LangJsGenerator;
@@ -35,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
 
             return new LangJsCommand($generator);
         });
+//        $this->app->singleton(
+//        // the original class
+//            'vendor/brotzka/laravel-dotenv-editor/src/DotenvEditor.php',
+//            // my custom class
+//            'app/DotenvEditor.php'
+//        );
     }
 
     /**
@@ -45,19 +50,5 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Pagination\Paginator::useBootstrap();
         Schema::defaultStringLength(191);
         app()->useLangPath(base_path('lang'));
-
-        // Force HTTPS in production
-        if (env('APP_ENV') !== 'local') {
-            URL::forceScheme('https');
-        }
-        if ($this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
-
-        // Check if the 'storage/app' directory exists and set permissions only in non-production
-        $storagePath = storage_path('app');
-        if (is_dir($storagePath) && env('APP_ENV') !== 'production') {
-            chmod($storagePath, 0775); // Set the directory permissions to 0775, only in non-production environments
-        }
     }
 }
