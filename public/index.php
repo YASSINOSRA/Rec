@@ -5,8 +5,8 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Increase max execution time (Optional)
-ini_set('max_execution_time', 120); // 120 seconds
+ini_set('max_execution_time', 120);
+ini_set('memory_limit', '256M'); 
 
 // Check If The Application Is Under Maintenance
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
@@ -32,8 +32,7 @@ try {
     // Optionally, return a 500 response or a custom error page
     return response()->view('errors.500', [], 500);
 }
-ini_set('max_execution_time', 120); // 120 seconds
-ini_set('memory_limit', '256M');    // Optional: increase memory limit
+
 
 
 // Terminate the request after sending the response
