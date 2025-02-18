@@ -32,6 +32,9 @@ try {
     // Optionally, return a 500 response or a custom error page
     return response()->view('errors.500', [], 500);
 }
+ini_set('max_execution_time', 120); // 120 seconds
+ini_set('memory_limit', '256M');    // Optional: increase memory limit
+
 
 // Terminate the request after sending the response
 $kernel->terminate($request, $response);
