@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Cashier::ignoreMigrations();
+
         $this->app->singleton('localization.js', function ($app) {
             $app = $this->app;
             $laravelMajorVersion = (int) $app::VERSION;
-
             $files = $app['files'];
 
             if ($laravelMajorVersion === 4) {
@@ -29,17 +29,17 @@ class AppServiceProvider extends ServiceProvider
             } elseif ($laravelMajorVersion >= 9) {
                 $langs = app()->langPath();
             }
+
             $messages = $app['config']->get('localization-js.messages');
             $generator = new LangJsGenerator($files, $langs, $messages);
 
             return new LangJsCommand($generator);
         });
-//        $this->app->singleton(
-//        // the original class
-//            'vendor/brotzka/laravel-dotenv-editor/src/DotenvEditor.php',
-//            // my custom class
-//            'app/DotenvEditor.php'
-//        );
+
+        // Set the public path correctly for production environments
+        $this->app->bind('path.public', function () {
+            return realpath(base_path() . '/../public_html');
+        });
     }
 
     /**
