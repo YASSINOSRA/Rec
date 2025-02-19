@@ -11,10 +11,12 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
+  
     protected $except = [
-        'subscription-update',
-        'admin/save-form',
-        'save-form-builder'
+    'form-builder',
+    'subscription-update',
+    'admin/save-form',
+    'save-form-builder'
+];
 
-    ];
 }
