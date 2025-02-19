@@ -30,22 +30,19 @@ return new class extends Migration
             $table->boolean('immediate_available')->default(1);
             $table->timestamps();
 
+            // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
             $table->foreign('marital_status_id')->references('id')->on('marital_status')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
             $table->foreign('career_level_id')->references('id')->on('career_levels')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
             $table->foreign('functional_area_id')->references('id')->on('functional_areas')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
             $table->foreign('industry_id')->references('id')->on('industries')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -57,6 +54,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('candidates');
+        // Drop dependent foreign key constraints from other tables
+        Schema::table('candidates', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['marital_status_id']);
+            $table->dropForeign(['career_level_id']);
+            $table->dropForeign(['functional_area_id']);
+            $table->dropForeign(['industry_id']);
+        });
+
+        // Now drop the candidates table if it exists
+        Schema::dropIfExists('candidates');
     }
 };

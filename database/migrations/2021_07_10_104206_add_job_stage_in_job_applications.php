@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('job_applications', function (Blueprint $table) {
+            // Add the new column
             $table->unsignedBigInteger('job_stage_id')->nullable()->after('notes');
 
+            // Add the foreign key constraint
             $table->foreign('job_stage_id')->references('id')->on('job_stages')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -25,10 +27,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('job_applications', 'job_stage_id')) {
-            Schema::table('job_applications', function (Blueprint $table) {
-                $table->dropColumn('job_stage_id');
-            });
-        }
+        Schema::table('job_applications', function (Blueprint $table) {
+            // Drop the foreign key constraint first
+            $table->dropForeign(['job_stage_id']);
+            
+            // Now drop the column
+            $table->dropColumn('job_stage_id');
+        });
     }
 };

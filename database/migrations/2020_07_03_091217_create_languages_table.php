@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('id')->autoIncrement(); // Matches candidate_language.language_id
             $table->string('language');
             $table->string('iso_code')->nullable();
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('languages');
+        Schema::dropIfExists('languages'); // Better than Schema::drop()
     }
 };

@@ -285,9 +285,9 @@ class ComposerStaticInitd9ba0385af3048706eac8807bbae878a
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
         ),
         'ZipStream\\' => 
         array (
@@ -1069,6 +1069,7 @@ class ComposerStaticInitd9ba0385af3048706eac8807bbae878a
         'App\\Http\\Livewire\\FavouriteCompanyTable' => __DIR__ . '/../..' . '/app/Http/Livewire/FavouriteCompanyTable.php',
         'App\\Http\\Livewire\\FavouriteJobTable' => __DIR__ . '/../..' . '/app/Http/Livewire/FavouriteJobTable.php',
         'App\\Http\\Livewire\\Followers' => __DIR__ . '/../..' . '/app/Http/Livewire/Followers.php',
+        'App\\Http\\Livewire\\FormBuilderTable' => __DIR__ . '/../..' . '/app/Http/Livewire/FormBuilderTable.php',
         'App\\Http\\Livewire\\FunctionalAreaTable' => __DIR__ . '/../..' . '/app/Http/Livewire/FunctionalAreaTable.php',
         'App\\Http\\Livewire\\FunctionalAreas' => __DIR__ . '/../..' . '/app/Http/Livewire/FunctionalAreas.php',
         'App\\Http\\Livewire\\HeaderSliderTable' => __DIR__ . '/../..' . '/app/Http/Livewire/HeaderSliderTable.php',
@@ -1240,6 +1241,7 @@ class ComposerStaticInitd9ba0385af3048706eac8807bbae878a
         'App\\Models\\Candidate' => __DIR__ . '/../..' . '/app/Models/Candidate.php',
         'App\\Models\\CandidateEducation' => __DIR__ . '/../..' . '/app/Models/CandidateEducation.php',
         'App\\Models\\CandidateExperience' => __DIR__ . '/../..' . '/app/Models/CandidateExperience.php',
+        'App\\Models\\CandidateLanguage' => __DIR__ . '/../..' . '/app/Models/CandidateLanguage.php',
         'App\\Models\\CareerLevel' => __DIR__ . '/../..' . '/app/Models/CareerLevel.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
