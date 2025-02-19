@@ -1,3 +1,13 @@
 /node_modules
 
+/vendor
+
 .env.backup
+/.phpunit.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.idea
+_ide_helper.php
+/resources/backups
