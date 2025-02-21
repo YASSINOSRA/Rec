@@ -24,6 +24,7 @@ class FormBuilderController extends Controller
 
         return view('formBuilder.index', compact('forms', 'scores'));
     }
+    
 
     public function create(Request $request)
     {
