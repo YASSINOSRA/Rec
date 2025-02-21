@@ -769,35 +769,54 @@ Route::middleware('web')->group(function () {
 
 
  //YRR
-Route::middleware(['auth', 'role:Admin', 'xss', 'verified.user', 'setLanguage'])->group(function () {
     
-    // Step 1: View the form builder page
-    Route::get('form-builder', [FormBuilderController::class, 'index'])->name('formbuilder.index');
+// Start Form Builder ===============================================================
 
-    // Step 2: View the form builder creation page
-    Route::view('formbuilder', 'FormBuilder.create')->name('formbuilder.create');
 
-    // Step 3: Save the form builder data (POST request)
-    Route::post('save-form-builder', [FormBuilderController::class, 'create'])->name('formbuilder.store');
+// Step 1: View the form builder page
+Route::get('form-builder', [FormBuilderController::class, 'index'])->name('formbuilder.index');
 
-    // Step 4: Delete the form (DELETE request)
-    Route::delete('form-delete/{id}', [FormBuilderController::class, 'destroy'])->name('formbuilder.delete');
+// Step 2: View the form builder creation page
+Route::view('formbuilder', 'FormBuilder.create')->name('formbuilder.create');
 
-    // Step 5: Edit form builder page
-    Route::view('edit-form-builder/{id}', 'FormBuilder.edit')->name('formbuilder.edit');
+// Step 3: Save the form builder data (POST request)
+Route::post('save-form-builder', [FormBuilderController::class, 'create'])->name('formbuilder.store');
 
-    // Step 6: Get data for editing form builder
-    Route::get('get-form-builder-edit/{id}', [FormBuilderController::class, 'editData'])->name('formbuilder.getEdit');
+// Step 4: Delete the form (DELETE request)
+Route::delete('form-delete/{id}', [FormBuilderController::class, 'destroy'])->name('formbuilder.delete');
 
-    // Step 7: Update the form builder data (POST request)
-    Route::post('update-form-builder/{id}', [FormBuilderController::class, 'update'])->name('formbuilder.update');
+// Step 5: Edit form builder page
+Route::view('edit-form-builder/{id}', 'FormBuilder.edit')->name('formbuilder.edit');
 
-    // Step 8: Read form builder page
-    Route::view('read-form-builder/{id}', 'FormBuilder.read')->name('formbuilder.read');
+// Step 6: Get data for editing form builder
+Route::get('get-form-builder-edit/{id}', [FormBuilderController::class, 'editData'])->name('formbuilder.getEdit');
 
-    // Step 9: Get the form builder data (GET request)
-    Route::get('get-form-builder', [FormsController::class, 'read'])->name('formbuilder.get');
+// Step 7: Update the form builder data (POST request)
+Route::post('update-form-builder/{id}', [FormBuilderController::class, 'update'])->name('formbuilder.update');
 
-    // Step 10: Save form transaction data (POST request)
-    Route::post('save-form-transaction', [FormsController::class, 'create'])->name('formbuilder.transaction');
-});
+// Step 8: Read form builder page
+Route::view('read-form-builder/{id}', 'FormBuilder.read')->name('formbuilder.read');
+
+// Step 9: Get the form builder data (GET request)
+Route::get('get-form-builder', [FormsController::class, 'read'])->name('formbuilder.get');
+
+// Step 10: Save form transaction data (POST request)
+Route::post('save-form-transaction', [FormsController::class, 'create'])->name('formbuilder.transaction');
+
+// End Form Builder ===============================================================
+
+// Additional routes:
+
+// Update form builder (POST request)
+Route::post('/update-form-builder', [FormBuilderController::class, 'update'])->name('update-form-builder');
+
+// Get user scores (GET request)
+Route::get('/user-scores', [FormsController::class, 'getUserScores'])->name('user.scores');
+
+// Save form transaction (POST request)
+Route::post('/save-form-transaction', [FormsController::class, 'create'])->name('save-form-transaction');
+
+// Thank you page
+Route::get('/thank-you', function () {
+    return view('FormBuilder.thank');
+})->name('thank');
