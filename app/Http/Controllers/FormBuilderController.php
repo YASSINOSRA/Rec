@@ -10,20 +10,22 @@ use Illuminate\Support\Facades\DB; // ✅ Import DB for raw queries
 class FormBuilderController extends Controller
 {
     public function index()
-    {
-        $forms = FormBuilder::all();
+{
+    try {
+        $forms = FormBuilder::all(); // Fetch all forms
 
-        // ✅ Fetch quiz scores
-        $scores = Forms::select(
-                'form_id',
-                DB::raw('AVG(score) as avg_score'),
-                DB::raw('COUNT(id) as attempts')
-            )
-            ->groupBy('form_id')
-            ->get();
+        if ($forms->isEmpty()) {
+            return response()->json(['message' => 'No forms found'], 200);
+        }
 
-        return view('formBuilder.index', compact('forms', 'scores'));
+        return view('FormBuilder.index', compact('forms'));
+    } catch (\Exception $e) {
+        \Log::error("Error in FormBuilderController@index: " . $e->getMessage());
+
+        return response()->json(['error' => 'Internal Server Error'], 500);
     }
+}
+
     
 
     public function create(Request $request)
