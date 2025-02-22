@@ -9,22 +9,17 @@ use Illuminate\Support\Facades\DB; // ✅ Import DB for raw queries
 
 class FormBuilderController extends Controller
 {
-    public function index()
+public function index()
 {
     try {
-        $forms = FormBuilder::all(); // Fetch all forms
-
-        if ($forms->isEmpty()) {
-            return response()->json(['message' => 'No forms found'], 200);
-        }
-
+        $forms = FormBuilder::all();
         return view('FormBuilder.index', compact('forms'));
     } catch (\Exception $e) {
         \Log::error("Error in FormBuilderController@index: " . $e->getMessage());
-
-        return response()->json(['error' => 'Internal Server Error'], 500);
+        return response()->json(['error' => 'Internal Server Error', 'details' => $e->getMessage()], 500);
     }
 }
+
 
     
 
