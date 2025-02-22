@@ -772,7 +772,6 @@ Route::middleware('web')->group(function () {
     
 // Start Form Builder ===============================================================
 
-
 // Step 1: View the form builder page
 Route::get('form-builder', [FormBuilderController::class, 'index'])->name('formbuilder.index');
 
