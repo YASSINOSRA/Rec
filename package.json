@@ -6,7 +6,7 @@
         "watch": "npx mix watch",
         "watch-poll": "npx mix watch -- --watch-options-poll=1000",
         "hot": "npx mix watch --hot",
-        "prod": "npm run production",
+         "prod": "NODE_OPTIONS=--openssl-legacy-provider npm run production",
         "production": "npx mix --production"
     },
     "devDependencies": {
